@@ -102,7 +102,7 @@
 
   box.addEventListener('click', async e => {
     const b = e.target.closest('button');
-    if (!b || b.type === 'submit') return;
+    if (!b || (b.form && b.type === 'submit')) return;   // odesílací tlačítka formulářů řeší událost submit
     msg = ''; if (!b.dataset.adm) reveal = null;
     try {
       if (b.dataset.att) await rpc('set_attendance', { p_token: S.token, p_match: next.date, p_status: b.dataset.att, p_player: +b.dataset.p });
