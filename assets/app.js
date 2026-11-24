@@ -41,6 +41,8 @@ function render(d) {
   if (!rest.length) $('#more').hidden = true;
 
   $('#foot').innerHTML = `Data: <a href="${esc(d.source_url)}" target="_blank" rel="noopener">sipky.org (UŠO)</a>, obnovují se automaticky každé 3 hodiny.`;
+  window.VLCI_DATA = d;
+  document.dispatchEvent(new Event('vlci-data'));
 }
 
 fetch('data.json', { cache: 'no-cache' })

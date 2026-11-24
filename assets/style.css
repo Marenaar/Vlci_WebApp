@@ -23,3 +23,25 @@ a{color:var(--sand)}
 .t.me{background:#241f17;color:var(--hi);font-weight:600;outline:1px solid var(--sand)}
 .m{display:flex;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding:10px 0}
 .m small{color:var(--dim);font-size:13px}
+
+/* přihlášení, docházka, správa */
+h3.h.sm{font-size:13px;margin-top:6px}
+form{display:flex;flex-direction:column;gap:12px}
+label{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--dim)}
+label.chk{flex-direction:row;align-items:center;gap:8px}
+input,select{font:16px 'Inter',sans-serif;min-height:44px;padding:0 12px;background:#0b0a09;color:var(--hi);border:1px solid #6b604c;border-radius:0}
+input[type=checkbox]{min-height:0;width:18px;height:18px}
+.b{font:600 14px 'Inter',sans-serif;min-height:44px;padding:0 18px;border:1px solid var(--sand);background:var(--sand);color:var(--bg);cursor:pointer}
+.b.ghost{background:transparent;color:var(--sand)}
+.lnk{font:inherit;background:none;border:0;padding:6px 2px;color:var(--sand);text-decoration:underline;cursor:pointer;min-height:32px}
+.err{margin:0;color:var(--hi);border-left:3px solid var(--sand);padding:6px 10px;background:#241f17;font-size:14px}
+.pr{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:48px;border-top:1px solid var(--line);font-size:14px;flex-wrap:wrap}
+.pr.col{flex-direction:column;align-items:flex-start;padding:8px 0}
+.pr.mine{background:#1a1610;outline:1px solid var(--sand);padding:4px 8px}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{font:600 13px 'Inter',sans-serif;min-height:44px;padding:0 12px;border:1px solid #6b604c;background:transparent;color:var(--sand);cursor:pointer}
+.seg button.act{background:var(--sand);color:var(--bg);border-color:var(--sand)}
+.chip.off{color:var(--dim);border-style:dashed;text-decoration:line-through}
+.chip.wait{color:var(--dim);border-color:#3a342b}
+.rev{border:1px solid var(--sand);padding:12px;display:flex;flex-direction:column;gap:8px;background:#1a1610}
+.rev p{margin:0}.pin{font:700 26px 'Cinzel',serif;letter-spacing:.2em}

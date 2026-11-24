@@ -13,3 +13,11 @@ Statický web (GitHub Pages) s tabulkou a nejbližšími zápasy ze sipky.org.
 - `.github/workflows/update-data.yml` ho spouští každé 3 hodiny a změnu commitne.
 - `scripts/config.json`: ID ligy a týmu. S novou sezónou stačí změnit `league` (a případně `team_id`).
 - Lokální test: `python scripts/fetch_data.py`
+
+## Databáze a přihlášení (Supabase)
+1. Na supabase.com založ projekt (free), region EU.
+2. SQL Editor → vlož celý `supabase/setup.sql` → Run. Výsledkem je tabulka **úvodních PINů** (zobrazí se jen jednou, ulož si ji).
+3. Project Settings → API: zkopíruj *Project URL* a *anon / publishable key* do `assets/config.js`. Klíč `service_role` / `secret` nikdy nedávej do webu.
+4. Commit a push. Hráči se přihlásí jménem + úvodním PINem a hned si ho změní.
+
+Tabulky jsou před webem zavřené (zapnutá RLS bez politik). Web smí jen volat funkce v `setup.sql`, které kontrolují přihlášení a práva.
