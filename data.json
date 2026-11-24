@@ -1,0 +1,22 @@
+{
+ "source_sync": "24.11.2026 09:54",
+ "source_url": "https://www.sipky.org/?region=jmoss&league=83713&page=ligova-skupina",
+ "team": {"id": 873473, "name": "Vlci"},
+ "standings": [
+  {"rank": 1, "id": 88322, "name": "DC Šumáci Klub K", "played": 7, "wins": 6, "draws": 0, "losses": 1, "score": [85, 41], "legs": [193, 115], "points": 18},
+  {"rank": 2, "id": 873217, "name": "Ta tam byla II Brno", "played": 7, "wins": 6, "draws": 0, "losses": 1, "score": [83, 43], "legs": [184, 117], "points": 18},
+  {"rank": 3, "id": 872449, "name": "Na Tipálu Brno", "played": 7, "wins": 5, "draws": 0, "losses": 2, "score": [79, 49], "legs": [181, 122], "points": 15},
+  {"rank": 4, "id": 874497, "name": "Šmoulové z PBL Brno", "played": 8, "wins": 5, "draws": 0, "losses": 3, "score": [79, 65], "legs": [183, 159], "points": 15},
+  {"rank": 5, "id": 873729, "name": "Warriors", "played": 7, "wins": 4, "draws": 0, "losses": 3, "score": [68, 59], "legs": [161, 144], "points": 13},
+  {"rank": 6, "id": 872961, "name": "DC Štiky Rosice B", "played": 7, "wins": 4, "draws": 0, "losses": 3, "score": [64, 63], "legs": [156, 156], "points": 11},
+  {"rank": 7, "id": 874753, "name": "Pacienti", "played": 8, "wins": 3, "draws": 0, "losses": 5, "score": [63, 82], "legs": [156, 187], "points": 10},
+  {"rank": 8, "id": 873985, "name": "Pohodáři - šipky nás baví Brno", "played": 7, "wins": 2, "draws": 0, "losses": 5, "score": [52, 74], "legs": [127, 169], "points": 6},
+  {"rank": 9, "id": 872705, "name": "JS Moto Bar Brno", "played": 8, "wins": 2, "draws": 0, "losses": 6, "score": [58, 86], "legs": [147, 194], "points": 6},
+  {"rank": 10, "id": 873473, "name": "Vlci", "played": 7, "wins": 2, "draws": 0, "losses": 5, "score": [49, 78], "legs": [124, 175], "points": 5},
+  {"rank": 11, "id": 874241, "name": "Ex na EX Brno B", "played": 7, "wins": 1, "draws": 0, "losses": 6, "score": [43, 83], "legs": [118, 192], "points": 3}
+ ],
+ "next_matches": [
+  {"date": "2026-11-29", "time": "15:00", "round": 9, "home": {"id": 873473, "name": "Vlci"}, "away": {"id": 874241, "name": "Ex na EX Brno B"}, "place": {"id": 143105, "name": "U Dvořáků, Brno", "address": "Hlavní 119, 624 00 Brno"}},
+  {"date": "2026-12-06", "time": "15:00", "round": 10, "home": {"id": 873473, "name": "Vlci"}, "away": {"id": 872705, "name": "JS Moto Bar Brno"}, "place": {"id": 143105, "name": "U Dvořáků, Brno", "address": "Hlavní 119, 624 00 Brno"}}
+ ]
+}

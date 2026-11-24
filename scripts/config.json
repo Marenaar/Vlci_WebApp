@@ -1,0 +1,10 @@
+{
+  "base": "https://www.sipky.org/",
+  "region": "jmoss",
+  "league": 83713,
+  "team_id": 873473,
+  "team_name": "Vlci",
+  "venues": {
+    "143105": "Hlavní 119, 624 00 Brno"
+  }
+}
