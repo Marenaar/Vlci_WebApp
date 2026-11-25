@@ -21,3 +21,8 @@ Statický web (GitHub Pages) s tabulkou a nejbližšími zápasy ze sipky.org.
 4. Commit a push. Hráči se přihlásí jménem + úvodním PINem a hned si ho změní.
 
 Tabulky jsou před webem zavřené (zapnutá RLS bez politik). Web smí jen volat funkce v `setup.sql`, které kontrolují přihlášení a práva.
+
+## Aktualizace verze 4 (karty, historie, statistiky, přezdívky)
+- Spusť znovu celý `supabase/setup.sql` (je bezpečné: nemaže data, nemění PINy, hráče zakládá jen do prázdné tabulky).
+- `assets/config.js` se nepřepisuje (jsou v něm tvoje klíče).
+- Po nasazení spusť ručně workflow *Aktualizace dat ze sipky.org*; historie zápasů se sbírá a slučuje, starší záznamy se nemažou.

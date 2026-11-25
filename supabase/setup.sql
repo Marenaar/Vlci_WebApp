@@ -15,6 +15,7 @@ create table if not exists players (
   failed int not null default 0,
   locked_until timestamptz
 );
+alter table players add column if not exists nickname text;   -- přezdívka (volitelná)
 create table if not exists sessions (
   token uuid primary key default gen_random_uuid(),
   player_id int not null references players(id) on delete cascade,
@@ -62,7 +63,7 @@ revoke all on function _auth(uuid, boolean) from public, anon, authenticated;
 -- ---------- přihlášení ----------
 create or replace function player_list() returns json
 language sql security definer set search_path = public as $$
-  select coalesce(json_agg(json_build_object('id', id, 'name', name) order by name), '[]'::json)
+  select coalesce(json_agg(json_build_object('id', id, 'name', name, 'nickname', nickname) order by name), '[]'::json)
   from players where active
 $$;
 
@@ -86,7 +87,7 @@ begin
   update players set failed = 0, locked_until = null where id = p.id;
   delete from sessions where player_id = p.id and expires_at < now();
   insert into sessions(player_id) values (p.id) returning token into t;
-  return json_build_object('token', t, 'player_id', p.id, 'name', p.name,
+  return json_build_object('token', t, 'player_id', p.id, 'name', p.name, 'nickname', p.nickname,
                            'is_admin', p.is_admin, 'must_change', p.must_change);
 end $$;
 
@@ -109,12 +110,12 @@ declare p players;
 begin
   p := _auth(p_token);
   return json_build_object(
-    'me', json_build_object('id', p.id, 'name', p.name, 'is_admin', p.is_admin),
-    'players', (select coalesce(json_agg(json_build_object('id', id, 'name', name) order by name), '[]'::json)
+    'me', json_build_object('id', p.id, 'name', p.name, 'nickname', p.nickname, 'is_admin', p.is_admin),
+    'players', (select coalesce(json_agg(json_build_object('id', id, 'name', name, 'nickname', nickname) order by name), '[]'::json)
                 from players where active and plays),
     'attendance', (select coalesce(json_agg(json_build_object('match', match_key, 'player', player_id, 'status', status)), '[]'::json)
                    from attendance where match_key >= to_char(current_date - 30, 'YYYY-MM-DD')),
-    'catering', (select coalesce(json_agg(json_build_object('match', c.match_key, 'player', c.player_id, 'name', pl.name)), '[]'::json)
+    'catering', (select coalesce(json_agg(json_build_object('match', c.match_key, 'player', c.player_id, 'name', coalesce(nullif(pl.nickname, ''), pl.name))), '[]'::json)
                  from catering c join players pl on pl.id = c.player_id
                  where c.match_key >= to_char(current_date - 30, 'YYYY-MM-DD')));
 end $$;
@@ -164,7 +165,7 @@ declare p players;
 begin
   p := _auth(p_token);
   if not p.is_admin then raise exception 'forbidden'; end if;
-  return (select coalesce(json_agg(json_build_object('id', id, 'name', name, 'active', active,
+  return (select coalesce(json_agg(json_build_object('id', id, 'name', name, 'nickname', nickname, 'active', active,
             'is_admin', is_admin, 'plays', plays, 'must_change', must_change) order by name), '[]'::json) from players);
 end $$;
 
@@ -210,6 +211,37 @@ grant execute on function player_list(), login(int, text), change_pin(uuid, text
   set_attendance(uuid, text, text, int), set_catering(uuid, text, int, text), admin_players(uuid),
   admin_add_player(uuid, text, boolean), admin_reset_pin(uuid, int),
   admin_update_player(uuid, int, text, boolean, boolean, boolean) to anon;
+
+-- ---------- přezdívka a statistiky docházky ----------
+create or replace function set_nickname(p_token uuid, p_nick text) returns json
+language plpgsql security definer set search_path = public as $$
+declare p players; n text;
+begin
+  p := _auth(p_token);
+  n := nullif(trim(coalesce(p_nick, '')), '');
+  if n is not null and length(n) > 24 then raise exception 'bad_nick'; end if;
+  update players set nickname = n where id = p.id;
+  return json_build_object('ok', true);
+end $$;
+
+-- Počítá potvrzenou účast u odehraných zápasů (datum před dneškem), u kterých někdo vyplnil docházku.
+create or replace function attendance_stats(p_token uuid) returns json
+language plpgsql security definer set search_path = public as $$
+declare p players; m int; today text := to_char(current_date, 'YYYY-MM-DD');
+begin
+  p := _auth(p_token);
+  select count(distinct match_key) into m from attendance where match_key < today;
+  return json_build_object('matches', m, 'players', (
+    select coalesce(json_agg(row_to_json(s) order by s.name), '[]'::json) from (
+      select pl.id, pl.name, pl.nickname,
+             count(a.status) filter (where a.status = 'yes') as yes,
+             count(a.status) filter (where a.status = 'no') as no,
+             count(a.status) filter (where a.status = 'maybe') as maybe
+      from players pl left join attendance a on a.player_id = pl.id and a.match_key < today
+      where pl.active and pl.plays group by pl.id) s));
+end $$;
+
+grant execute on function set_nickname(uuid, text), attendance_stats(uuid) to anon;
 
 -- ---------- úvodní hráči (soupiska ze sipky.org) + účet správce ----------
 -- Spustí se jen na prázdné tabulce. Úvodní PINy se vypíšou jako výsledek tohoto dotazu.
