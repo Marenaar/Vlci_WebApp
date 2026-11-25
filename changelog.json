@@ -1,5 +1,13 @@
 [
  {
+  "version": "3.3",
+  "date": "2026-11-25",
+  "title": "Nové logo",
+  "new": [
+   "Nové logo týmu na webu i jako ikona aplikace (záložka prohlížeče, plocha telefonu)."
+  ]
+ },
+ {
   "version": "3.2",
   "date": "2026-11-25",
   "title": "Ikona aplikace",

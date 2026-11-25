@@ -3,7 +3,7 @@
 body{margin:0;background:var(--bg);color:var(--sand);font:16px/1.45 'Inter',system-ui,sans-serif}
 main{max-width:520px;margin:0 auto;padding:20px 16px 32px;display:flex;flex-direction:column;gap:18px}
 header{display:flex;align-items:center;gap:14px}
-header img{mix-blend-mode:lighten;border-radius:50%}
+header img{mix-blend-mode:lighten}
 .h{font-family:'Cinzel',serif;letter-spacing:.08em;text-transform:uppercase;color:var(--sand);margin:0;font-weight:700}
 h1.h{font-size:30px}h2.h{font-size:16px}
 .lab{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:0}
