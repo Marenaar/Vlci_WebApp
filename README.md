@@ -26,3 +26,6 @@ Tabulky jsou před webem zavřené (zapnutá RLS bez politik). Web smí jen vola
 - Spusť znovu celý `supabase/setup.sql` (je bezpečné: nemaže data, nemění PINy, hráče zakládá jen do prázdné tabulky).
 - `assets/config.js` se nepřepisuje (jsou v něm tvoje klíče).
 - Po nasazení spusť ručně workflow *Aktualizace dat ze sipky.org*; historie zápasů se sbírá a slučuje, starší záznamy se nemažou.
+
+## Seznam verzí
+`changelog.json`: nová verze se přidává **na začátek** seznamu (pole `new` = nové věci, `fix` = opravy). První záznam se zobrazí v patičce jako aktuální verze. Při změně skriptů nebo stylů zvyš také číslo `?v=` v `index.html`, aby si prohlížeče stáhly čerstvé soubory.

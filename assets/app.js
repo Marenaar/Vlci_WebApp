@@ -11,19 +11,35 @@ const place = m => `<a href="${maps(m)}" target="_blank" rel="noopener">${esc(m.
 const badge = home => `<span class="chip ${home ? 'on' : ''}">${home ? 'DOMA' : 'VENKU'}</span>`;
 
 /* ---------- záložky (hash: #zapas #tabulka #historie #statistiky #profil) ---------- */
-const TABS = ['zapas', 'tabulka', 'historie', 'statistiky', 'profil'];
+const TABS = ['zapas', 'tabulka', 'historie', 'statistiky', 'profil', 'verze'];   // „verze“ není v menu, otevírá se z patičky
 function route() {
   const t = (location.hash || '#zapas').slice(1), cur = TABS.includes(t) ? t : 'zapas';
   TABS.forEach(x => {
     document.getElementById('t-' + x).hidden = x !== cur;
     const a = document.querySelector(`.nav [data-t="${x}"]`);
-    if (x === cur) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+    if (a) { if (x === cur) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); }
   });
   window.scrollTo(0, 0);
   document.dispatchEvent(new CustomEvent('vlci-tab', { detail: cur }));
 }
 addEventListener('hashchange', route);
 route();
+
+/* ---------- patička a seznam verzí ---------- */
+let VER = null, SRC = null;
+const foot = () => {
+  $('#foot').innerHTML = (VER ? `Verze <a href="#verze">${esc(VER)}</a>` : '') + (VER && SRC ? ' · ' : '') +
+    (SRC ? `Data: <a href="${esc(SRC)}" target="_blank" rel="noopener">sipky.org (UŠO)</a>, obnovují se každé 3 hodiny.` : '');
+};
+const isoCz = s => { const [y, m, d] = s.split('-').map(Number); return `${d}. ${m}. ${y}`; };
+const items = (lab, a) => a && a.length ? `<p class="lab">${lab}</p><ul>${a.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '';
+function renderLog(list) {
+  VER = list[0].version; foot();
+  $('#changelog').innerHTML = `<div class="top"><h2 class="h">Verze a změny</h2><a href="#zapas">Zpět</a></div>` +
+    list.map((v, i) => `<div class="ver"><div class="top"><b>Verze ${esc(v.version)}${v.title ? ' · ' + esc(v.title) : ''}</b>${i === 0 ? '<span class="chip on">aktuální</span>' : ''}</div>
+      <small class="dim">${isoCz(v.date)}</small>${items('Nové', v.new)}${items('Opravy', v.fix)}</div>`).join('');
+}
+fetch('changelog.json', { cache: 'no-cache' }).then(r => r.json()).then(renderLog).catch(() => {});
 
 /* ---------- vykreslení ---------- */
 function render(d) {
@@ -65,7 +81,7 @@ function render(d) {
       }).join('')
     : '<p class="dim">Odehrané zápasy se zde objeví po prvním zápase, který import zachytí.</p>');
 
-  $('#foot').innerHTML = `Data: <a href="${esc(d.source_url)}" target="_blank" rel="noopener">sipky.org (UŠO)</a>, obnovují se automaticky každé 3 hodiny.`;
+  SRC = d.source_url; foot();
   window.VLCI_DATA = d;
   document.dispatchEvent(new Event('vlci-data'));
 }

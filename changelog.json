@@ -1,0 +1,23 @@
+[
+ {"version": "3.1", "date": "2026-11-25", "title": "Seznam verzí",
+  "new": ["Stránka „Verze a změny“ s přehledem všech verzí aplikace (odkaz v patičce)."]},
+ {"version": "3.0", "date": "2026-11-25", "title": "Karty a spodní menu",
+  "new": ["Spodní menu: Zápas, Tabulka, Historie, Statistiky, Profil.",
+          "Historie zápasů s bilancí a odkazem na zápis na sipky.org.",
+          "Statistiky docházky: potvrzená účast hráčů u odehraných zápasů.",
+          "Přezdívky: každý hráč si ji nastaví v Profilu a zobrazuje se v docházce a u občerstvení."],
+  "fix": ["Prázdná karta „Další zápasy“ se už nezobrazuje."]},
+ {"version": "2.1", "date": "2026-11-24", "title": "Opravy ovládání",
+  "fix": ["Tlačítka (Hraju / Nehraju, Beru to, Odhlásit, Správa týmu) nereagovala.",
+          "Nové verze se v prohlížečích (zejména Safari) načtou hned, bez ručního mazání mezipaměti."]},
+ {"version": "2.0", "date": "2026-11-24", "title": "Přihlášení, docházka a správa",
+  "new": ["Přihlášení jménem a PINem, při prvním přihlášení se PIN musí změnit.",
+          "Docházka k příštímu zápasu (Hraju / Nehraju / Nevím) s přehledem celého týmu.",
+          "Občerstvení u domácích zápasů: kdo ho zajišťuje, „Beru to“ a „Zrušit“.",
+          "Správa týmu pro kapitána a admina: nové PINy, přidání, vyřazení a přejmenování hráčů."]},
+ {"version": "1.0", "date": "2026-11-24", "title": "První verze",
+  "new": ["Průběžná tabulka 2. ligy F a příští zápas s místem, časem a odpočtem.",
+          "Přehled dalších zápasů.",
+          "Data se automaticky obnovují ze sipky.org každé 3 hodiny.",
+          "Vzhled podle loga týmu."]}
+]

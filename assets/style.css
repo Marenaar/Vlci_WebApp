@@ -58,3 +58,7 @@ a.b{display:inline-flex;align-items:center;justify-content:center;text-decoratio
 .st{display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line);padding:10px 0;font-size:14px}
 .bar{height:8px;background:#241f17;border:1px solid #3a342b}
 .bar i{display:block;height:100%;background:var(--sand)}
+
+/* seznam verzí */
+.ver{border-top:1px solid var(--line);padding:12px 0;display:flex;flex-direction:column;gap:6px;font-size:14px}
+.ver ul{margin:0;padding-left:18px}.ver li{margin:3px 0}
