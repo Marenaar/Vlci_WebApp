@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
- "source_sync": "24.11.2026 09:54",
-=======
- "source_sync": "24.11.2026 23:24",
->>>>>>> 3e7504a047763f7ebe1dab136270a292c51b3935
+ "source_sync": "25.11.2026 08:36",
  "source_url": "https://www.sipky.org/?region=jmoss&league=83713&page=ligova-skupina",
  "team": {
   "id": 873473,
@@ -247,42 +243,5 @@
    }
   }
  ],
- "history": [
-  {
-   "date": "2026-11-21",
-   "time": "15:00",
-   "round": 4,
-   "home": {
-    "id": 873985,
-    "name": "Pohodáři - šipky nás baví Brno"
-   },
-   "away": {
-    "id": 873473,
-    "name": "Vlci"
-   },
-   "score": [
-    8,
-    10
-   ],
-   "match_id": null
-  },
-  {
-   "date": "2026-11-15",
-   "time": "15:00",
-   "round": 7,
-   "home": {
-    "id": 873473,
-    "name": "Vlci"
-   },
-   "away": {
-    "id": 88322,
-    "name": "DC Šumáci Klub K"
-   },
-   "score": [
-    7,
-    11
-   ],
-   "match_id": null
-  }
- ]
+ "history": []
 }
